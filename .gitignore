@@ -72,3 +72,5 @@ local.properties
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+**/cert.certificate
+**/key.certificate
