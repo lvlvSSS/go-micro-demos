@@ -1,23 +1,29 @@
 package main
 
 import (
-	"bufio"
 	"crypto/tls"
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 	"path/filepath"
+	"simple_server/homepage"
 	"time"
 	"utils"
 )
 
 func main() {
+	logger := log.New(os.Stdout, "go-micro-demos ", log.LstdFlags|log.Lshortfile)
+	handlers := homepage.NewHandlers(logger)
 	mux := http.NewServeMux()
-	mux.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {
+
+	/*mux.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {
 		writer.WriteHeader(http.StatusOK)
 		writer.Header().Set("Content-Type", "application/json; charset=utf-8")
 		bufio.NewReader(request.Body).WriteTo(writer)
-	})
+	})*/
+
+	handlers.SetupRoutes(mux)
 
 	config := &tls.Config{
 		CurvePreferences: []tls.CurveID{
@@ -64,6 +70,7 @@ func main() {
 	key.WriteTo(keyFile)
 
 	err = customServer.ListenAndServeTLS(certFileName, keyFileName)
+	logger.Println("server starting ...")
 	if err != nil {
 		fmt.Printf("http server error : %v \n", err)
 	}
