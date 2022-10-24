@@ -49,7 +49,7 @@ func TestJwt1(t *testing.T) {
 	sign, _ := jws.Sign([]byte("{\"iss\":\"github.com/lestrrat-go/jwx\"}"), jwa.HS256, []byte("nelson"))
 	t.Logf("jws sign : %s", sign)
 
-	decodeString, _ := base64.StdEncoding.DecodeString("eyJpc3MiOiJodHRwOi8vc2hhb2Jhb2Jhb2VyLmNuIiwiYXVkIjoiaHR0cDovL3NoYW9iYW9iYW9lci5jbi93ZWJ0ZXN0L2p3dF9hdXRoLyIsImp0aSI6IjRmMWcyM2ExMmFhIiwiaWF0IjoxNTM0MDcwNTQ3LCJuYmYiOjE1MzQwNzA2MDcsImV4cCI6MTUzNDA3NDE0NywidWlkIjoxLCJkYXRhIjp7InVuYW1lIjoic2hhb2JhbyIsInVFbWFpbCI6InNoYW9iYW9iYW9lckAxMjYuY29tIiwidUlEIjoiMHhBMCIsInVHcm91cCI6Imd1ZXN0In19")
+	decodeString, _ := base64.StdEncoding.DecodeString("eyJhdWQiOlsibmVsc29uIl0sImlzcyI6ImdpdGh1Yi5jb20vbGVzdHJyYXQtZ28vand4IiwianRpIjoiMSJ9")
 
 	t.Logf("decode: %s", decodeString)
 
